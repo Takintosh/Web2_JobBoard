@@ -1,0 +1,17 @@
+php_value date.timezone 'America/Montevideo'
+AddType 'text/html; charset=UTF-8' html
+
+ErrorDocument 404 /404
+
+<IfModule mod_rewrite.c>
+
+    Options +FollowSymLinks -MultiViews
+    RewriteEngine On
+    RewriteBase /
+
+    #This redirects every f***ing URL to the main file, index.php
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.+)$ index.php [QSA,L]
+
+</IfModule>
