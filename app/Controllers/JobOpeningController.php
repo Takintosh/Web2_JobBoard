@@ -1,8 +1,12 @@
 <?php
 
+require_once '../app/DAO/JobOpeningDAO.php';
+
 class JobOpeningController {
+    private $jobOpeningDAO;
 
     public function __construct() {
+        $this->jobOpeningDAO = new JobOpeningDAO();
         // Initialize session
         session_start();
     }
@@ -11,7 +15,8 @@ class JobOpeningController {
      * Home page - Displays a list of job openings for users.
      */
     public function index() {
-        $this->render('user/home', 'user');
+        $jobOpenings = $this->jobOpeningDAO->findAll();
+        $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings]);
     }
 
     /**
