@@ -13,14 +13,14 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Job Portal</a>
+            <a class="navbar-brand" href="/">Job Portal</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Home
+                        <a class="nav-link active" href="/">Home
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
@@ -38,23 +38,39 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user"></i>
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <!--ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
+                        </ul-->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Sign In</a></li>
+                            <li><a class="dropdown-item" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp; Sign Up</a></li>
                         </ul>
                     </li>
                 </ul>
-                <!--form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search" spellcheck="false" data-ms-editor="true">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form-->
             </div>
         </div>
     </nav>
 </header>
 
 <main class="flex-shrink-0 mt-5">
+
+    <?php if (isset($_SESSION['message'])): ?>
+        <div class="position-fixed top-0 end-0 mt-5 me-4">
+            <div class="alert alert-dismissible mt-5
+            <?php
+            echo $_SESSION['msgType'];
+            unset($_SESSION['msgType']); ?>
+            ">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']); ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <?php echo $content; ?>
 </main>
 

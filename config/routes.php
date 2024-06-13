@@ -15,6 +15,8 @@ $router = new Router();
 
 // Routes for guest users
 $router->get('/', [JobOpeningController::class, 'index']);
+$router->get('/signup', [UserController::class, 'signUp']);
+$router->post('/signup', [UserController::class, 'create']);
 
 // Routes for registered users
 

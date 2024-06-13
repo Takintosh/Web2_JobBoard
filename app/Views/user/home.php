@@ -1,4 +1,4 @@
-<section class="container mt-5 border-2 bg-primary" id="search-panel">
+<section class="container mt-5 bg-primary" id="search-panel">
     <div class="row">
         <div class="col-12">
             <h4 class="mt-4 text-light text-center"><b>Search for Job Openings</b></h4>
@@ -27,7 +27,7 @@
         </div>
 </section>
 
-<section class="container mt-4 mb-4 px-4 pb-3 border-2 bg-primary" id="job-openings">
+<section class="container mt-4 mb-4 px-4 pb-3 bg-primary" id="job-openings">
 
     <div class="row">
         <div class="col-12">
