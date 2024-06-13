@@ -44,7 +44,7 @@
             <div class="mt-2 mb-3 mx-1 bg-light px-3 pt-3 d-flex flex-column job-card">
                 <div class="d-flex align-items-center mb-2">
                     <!-- Company logo -->
-                    <img src="https://static.vecteezy.com/system/resources/previews/027/127/473/original/microsoft-logo-microsoft-icon-transparent-free-png.png"
+                    <img src="/uploads/companies/<?php echo htmlspecialchars($jobOpening->getCompany()->getLogo()); ?>" alt="<?php echo htmlspecialchars($jobOpening->getCompany()->getName()); ?>"
                          class="company-logo me-3">
                     <div>
                         <!-- Job title and company name -->

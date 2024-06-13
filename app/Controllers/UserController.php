@@ -35,7 +35,7 @@ class UserController {
 
         // Handle profile picture upload
         if (!empty($_FILES['signup-picture']['name'])) {
-            $targetDir = "../public/uploads/";
+            $targetDir = "../public/uploads/users/";
             $targetFile = $targetDir . basename($_FILES["signup-picture"]["name"]);
             move_uploaded_file($_FILES["signup-picture"]["tmp_name"], $targetFile);
             $user->setPicture($_FILES['signup-picture']['name']);
