@@ -3,7 +3,7 @@
 require_once 'router.php';
 require_once '../app/Controllers/UserController.php';
 require_once '../app/Controllers/JobOpeningController.php';
-require_once '../app/Controllers/ApplicationController.php';
+//require_once '../app/Controllers/ApplicationController.php';
 require_once '../app/Middlewares/AuthMiddleware.php';
 require_once '../app/Middlewares/AdminMiddleware.php';
 
