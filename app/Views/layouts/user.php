@@ -45,6 +45,7 @@
                             <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <form action="/logout" method="post">
+                                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                 <li><button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</button></li>
                             </form>
                         </ul>
@@ -90,6 +91,7 @@
             <div class="modal-content">
 
                 <form id="login-form" action="/login" method="post">
+                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="loginModalLabel">Sign In</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
