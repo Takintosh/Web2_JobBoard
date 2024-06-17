@@ -35,6 +35,7 @@ class CompanyDAO {
             $company->setContactEmail($row['contact_email']);
             $company->setContactPhone($row['contact_phone']);
             $company->setWebsite($row['website']);
+            $company->setDescription($row['description']);
             // Return the populated CompanyModel object
             return $company;
         }

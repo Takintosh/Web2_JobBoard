@@ -10,7 +10,7 @@ class AuthMiddleware {
         // Check if the 'user' key exists in the session
         if (!isset($_SESSION['user'])) {
             // If not authenticated, redirect to the login page
-            header('Location: /login');
+            header('Location: /');
             exit(); // Exit the script
         }
     }

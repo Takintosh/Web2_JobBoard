@@ -9,3 +9,10 @@ section, .job-card {
     border-radius: 10px;
     border: 2px solid #aaa;
 }
+
+.company-logo-modal {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    border: 2px solid #aaa;
+}
