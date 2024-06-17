@@ -36,17 +36,27 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 profile-menu">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user"></i>
+                            <?php echo isset($_SESSION['user']) ? htmlspecialchars($_SESSION['user']['name']) : 'Account'; ?>
+                            &nbsp;<i class="fas fa-user"></i>
                         </a>
-                        <!--ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        <?php if (isset($_SESSION['user'])): ?>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</a></li>
-                        </ul-->
+                            <form action="/logout" method="post">
+                                <li><button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt fa-fw"></i> Log Out</button></li>
+                            </form>
+                        </ul>
+                        <?php else: ?>
+
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Sign In</a></li>
+                            <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Sign In</button></li>
                             <li><a class="dropdown-item" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp; Sign Up</a></li>
                         </ul>
+
+                        <?php endif; ?>
+
                     </li>
                 </ul>
             </div>
@@ -72,6 +82,36 @@
     <?php endif; ?>
 
     <?php echo $content; ?>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <form id="login-form" action="/login" method="post">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="loginModalLabel">Sign In</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="E-mail Address" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required pattern=".{8,}">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary mx-auto">Sign In</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
 </main>
 
 <footer class="footer mt-auto py-3 bg-primary">
@@ -82,5 +122,6 @@
 
 <script src="https://kit.fontawesome.com/6ffc72a9ab.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

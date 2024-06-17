@@ -10,8 +10,8 @@ require_once '../app/Middlewares/AdminMiddleware.php';
 $router = new Router();
 
 // Authentication routes
-#$router->post('/login', [UserController::class, 'login']);
-#$router->post('/logout', [UserController::class, 'logout']);
+$router->post('/login', [UserController::class, 'login']);
+$router->post('/logout', [UserController::class, 'logout']);
 
 // Routes for guest users
 $router->get('/', [JobOpeningController::class, 'index']);

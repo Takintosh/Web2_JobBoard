@@ -7,8 +7,6 @@ class JobOpeningController {
 
     public function __construct() {
         $this->jobOpeningDAO = new JobOpeningDAO();
-        // Initialize session
-        session_start();
     }
 
     /**
@@ -16,6 +14,7 @@ class JobOpeningController {
      */
     public function index() {
         $jobOpenings = $this->jobOpeningDAO->findAll();
+        session_start();
         $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings]);
     }
 
