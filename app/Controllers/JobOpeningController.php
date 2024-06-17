@@ -14,7 +14,6 @@ class JobOpeningController {
      */
     public function index() {
         $jobOpenings = $this->jobOpeningDAO->findAll();
-        session_start();
         $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings]);
     }
 
