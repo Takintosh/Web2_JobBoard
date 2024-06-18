@@ -21,7 +21,8 @@ class JobOpeningController {
      * Admin page - Displays a list of job openings for administrators.
      */
     public function adminListJobOpenings() {
-        echo "List of job openings for the admin";
+        $jobOpenings = $this->jobOpeningDAO->findAll();
+        $this->render('admin/job_openings', 'admin', ['jobOpenings' => $jobOpenings]);
     }
 
     /**

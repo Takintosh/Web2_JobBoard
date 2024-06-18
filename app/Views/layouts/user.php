@@ -42,6 +42,9 @@
 
                         <?php if (isset($_SESSION['user'])): ?>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+                            <li><a class="dropdown-item" href="/admin"><i class="fas fa-cog fa-fw"></i> Admin Panel</a></li>
+                            <?php endif; ?>
                             <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <form action="/logout" method="post">
