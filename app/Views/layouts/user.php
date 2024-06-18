@@ -29,9 +29,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Contract</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Full-time</a>
-                            <a class="dropdown-item" href="#">Part-time</a>
-                            <a class="dropdown-item" href="#">Freelancer</a>
+                            <a class="dropdown-item" href="/contract/full-time">Full-time</a>
+                            <a class="dropdown-item" href="/contract/part-time">Part-time</a>
+                            <a class="dropdown-item" href="/contract/freelancer">Freelancer</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

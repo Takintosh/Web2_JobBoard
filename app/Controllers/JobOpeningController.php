@@ -71,6 +71,13 @@ class JobOpeningController {
         }
     }
 
+    public function listByContract($contract) {
+        $jobOpenings = $this->jobOpeningDAO->findByContract($contract);
+        $this->companyDAO = new CompanyDAO();
+        $companies = $this->companyDAO->findAll();
+        $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings, 'companies' => $companies, 'contract' => $contract]);
+    }
+
     /**
      * Renders the specified view within the specified layout.
      *

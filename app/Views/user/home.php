@@ -31,14 +31,14 @@
 
     <div class="row">
         <div class="col-12">
-            <h4 class="mt-4 mx-2 text-light"><b>
+            <h4 class="mt-4 mx-2 text-light"><b style="text-transform: capitalize">
                     <!-- If current url is /, display "Recent Job Openings" -->
                     <?php if ($_SERVER['REQUEST_URI'] == '/'): ?>
                         Recent job openings
                     <?php elseif (preg_match("/^\/company\//", $_SERVER['REQUEST_URI'])): ?>
                         <?php echo htmlspecialchars($company->getName()); ?> job openings
-                    <?php else: ?>
-                        Your job openings
+                    <?php elseif (preg_match("/^\/contract\//", $_SERVER['REQUEST_URI'])): ?>
+                        <?php echo htmlspecialchars($contract); ?> job openings
                     <?php endif; ?>
                 </b></h4>
             <hr class="border-light">

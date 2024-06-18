@@ -18,6 +18,7 @@ $router->get('/', [JobOpeningController::class, 'index']);
 $router->get('/signup', [UserController::class, 'signUp']);
 $router->post('/signup', [UserController::class, 'create']);
 $router->get('/company/{slug}', [JobOpeningController::class, 'listByCompany']);
+$router->get('/contract/{contract}', [JobOpeningController::class, 'listByContract']);
 
 // Routes for registered users
 $router->post('/apply', [ApplicationController::class, 'apply'], AuthMiddleware::class);
