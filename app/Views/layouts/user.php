@@ -20,16 +20,24 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">Home
+                        <a class="nav-link active" href="/">Jobs list
                             <span class="visually-hidden">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Carreer</a>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Contract</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Information Technology</a>
-                            <a class="dropdown-item" href="#">Accounting</a>
-                            <a class="dropdown-item" href="#">Anything else</a>
+                            <a class="dropdown-item" href="#">Full-time</a>
+                            <a class="dropdown-item" href="#">Part-time</a>
+                            <a class="dropdown-item" href="#">Freelancer</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Company</a>
+                        <div class="dropdown-menu">
+                            <?php foreach ($companies as $company): ?>
+                                <a class="dropdown-item" href="/company/<?php echo htmlspecialchars($company->getSlug()); ?>"><?php echo htmlspecialchars($company->getName()); ?></a>
+                            <?php endforeach; ?>
                         </div>
                     </li>
                 </ul>

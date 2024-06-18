@@ -15,6 +15,7 @@
                     <th>Company</th>
                     <th>Status</th>
                     <th>Actions</th>
+                    <th>Count</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -23,6 +24,7 @@
                     <th>Company</th>
                     <th>Status</th>
                     <th>Actions</th>
+                    <th>Count</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -45,6 +47,9 @@
                                 <?php endif; ?>
                             </button>
                         </form>
+                    </td>
+                    <td>
+
                     </td>
                 </tr>
                 <?php endforeach; ?>

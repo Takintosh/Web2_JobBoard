@@ -31,7 +31,17 @@
 
     <div class="row">
         <div class="col-12">
-            <h4 class="mt-4 mx-2 text-light"><b>Recent Openings</b></h4>
+            <h4 class="mt-4 mx-2 text-light"><b>
+                    <!-- If current url is /, display "Recent Job Openings" -->
+                    <?php if ($_SERVER['REQUEST_URI'] == '/'): ?>
+                        Recent Job Openings
+                    <?php elseif (preg_match("/^\/company\//", $_SERVER['REQUEST_URI'])): ?>
+                        <?php echo htmlspecialchars($company->getName()); ?> Job Openings
+                    <?php else: ?>
+                        <!-- If current url is /company/home, display "Your Job Openings" -->
+                        Your Job Openings
+                    <?php endif; ?>
+                </b></h4>
             <hr class="border-light">
         </div>
     </div>

@@ -4,6 +4,7 @@ require_once '../app/DAO/JobOpeningDAO.php';
 
 class JobOpeningController {
     private $jobOpeningDAO;
+    private $companyDAO;
 
     public function __construct() {
         $this->jobOpeningDAO = new JobOpeningDAO();
@@ -14,7 +15,9 @@ class JobOpeningController {
      */
     public function index() {
         $jobOpenings = $this->jobOpeningDAO->findAll();
-        $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings]);
+        $this->companyDAO = new CompanyDAO();
+        $companies = $this->companyDAO->findAll();
+        $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings, 'companies' => $companies]);
     }
 
     /**
@@ -50,7 +53,22 @@ class JobOpeningController {
         }
         header('Location: /admin');
         exit();
+    }
 
+    public function listByCompany($companySlug) {
+        $this->companyDAO = new CompanyDAO();
+        $company = $this->companyDAO->findBySlug($companySlug);
+        if(!$company) {
+            $_SESSION['message'] = 'Company not found';
+            $_SESSION['msgType'] = 'alert-danger';
+            header('Location: /');
+            exit();
+        } else {
+            $companyId = $company->getId();
+            $jobOpenings = $this->jobOpeningDAO->findByCompany($companyId);
+            $companies = $this->companyDAO->findAll();
+            $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings, 'companies' => $companies, 'company' => $company]);
+        }
     }
 
     /**

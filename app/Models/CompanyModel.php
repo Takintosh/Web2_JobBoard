@@ -9,6 +9,7 @@ class CompanyModel {
     private $contactPhone;
     private $website;
     private $description;
+    private $slug;
 
     // Getters & Setters
     public function getId()
@@ -74,6 +75,13 @@ class CompanyModel {
         $this->description = $description;
     }
 
-
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
 
 }
