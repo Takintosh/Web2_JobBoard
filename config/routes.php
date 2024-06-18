@@ -3,7 +3,7 @@
 require_once 'router.php';
 require_once '../app/Controllers/UserController.php';
 require_once '../app/Controllers/JobOpeningController.php';
-//require_once '../app/Controllers/ApplicationController.php';
+require_once '../app/Controllers/ApplicationController.php';
 require_once '../app/Middlewares/AuthMiddleware.php';
 require_once '../app/Middlewares/AdminMiddleware.php';
 
@@ -19,6 +19,7 @@ $router->get('/signup', [UserController::class, 'signUp']);
 $router->post('/signup', [UserController::class, 'create']);
 
 // Routes for registered users
+$router->post('/apply', [ApplicationController::class, 'apply'], AuthMiddleware::class);
 
 // Routes for administrators
 $router->get('/admin', [JobOpeningController::class, 'adminListJobOpenings'], AdminMiddleware::class);

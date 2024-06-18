@@ -85,6 +85,7 @@
                         data-bs-phone="<?php echo htmlspecialchars($jobOpening->getCompany()->getContactPhone()); ?>"
                         data-bs-companydescription="<?php echo htmlspecialchars($jobOpening->getCompany()->getDescription()); ?>"
                         data-bs-logo="<?php echo htmlspecialchars($jobOpening->getCompany()->getLogo()); ?>"
+                        data-bs-jobid="<?php echo $jobOpening->getId(); ?>"
                 >Apply</button>
             </div>
         </div>
@@ -138,7 +139,11 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <?php if (isset($_SESSION['user'])): ?>
-                        <button type="button" class="btn btn-primary">Apply to Job</button>
+                    <form action="/apply" method="post">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                        <input type="hidden" id="modal-job-id" value="" name="job_id">
+                        <button type="submit" class="btn btn-primary">Apply to Job</button>
+                    </form>
                     <?php else: ?>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login to Apply</button>
                     <?php endif; ?>
@@ -170,6 +175,7 @@
         var phone = button.getAttribute('data-bs-phone');
         var companyDescription = button.getAttribute('data-bs-companydescription');
         var logo = button.getAttribute('data-bs-logo');
+        var jobId = button.getAttribute('data-bs-jobid');
 
         // Update the modal's content
         var modalJobTitle = jobOpeningModal.querySelector('#modal-job-title');
@@ -185,6 +191,7 @@
         var modalJobPhone = jobOpeningModal.querySelector('#modal-job-phone');
         var modalJobCompanyDescription = jobOpeningModal.querySelector('#modal-job-companydescription');
         var modalJobLogo = jobOpeningModal.querySelector('#modal-job-logo');
+        var modalJobId = jobOpeningModal.querySelector('#modal-job-id');
 
         //modalTitle.textContent = title;
         modalJobTitle.textContent = title;
@@ -200,6 +207,7 @@
         modalJobPhone.textContent = phone;
         modalJobCompanyDescription.textContent = companyDescription;
         modalJobLogo.src = '/uploads/companies/' + logo;
+        modalJobId.value = jobId;
 
         // Add protocol if missing
         if (website && !website.startsWith('http://') && !website.startsWith('https://')) {
