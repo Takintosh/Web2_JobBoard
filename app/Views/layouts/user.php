@@ -20,8 +20,10 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/">Jobs list
-                            <span class="visually-hidden">(current)</span>
+                        <a class="nav-link " href="/">Recent
+                            <?php if ($_SERVER['REQUEST_URI'] === '/') : ?>
+                                <span class="visually-hidden">(current)</span>
+                            <?php endif; ?>
                         </a>
                     </li>
                     <li class="nav-item dropdown">
