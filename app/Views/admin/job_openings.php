@@ -34,8 +34,17 @@
                     <td><?php echo htmlspecialchars($jobOpening->getCompany()->getName()); ?></td>
                     <td><?php echo htmlspecialchars($jobOpening->getStatus()); ?></td>
                     <td>
-                        <a href="#" title="Change Visibility"><i class="fas fa-eye"></i></a>
-                        <a href="#" title="View applications"><i class="fas fa-list-alt"></i></a>
+                        <form action="/admin/change-visibility/<?php echo htmlspecialchars($jobOpening->getId()); ?>" method="post">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <input type="hidden" name="jobOpeningId" value="<?php echo htmlspecialchars($jobOpening->getId()); ?>">
+                            <button type="submit" title="Change Visibility" class="btn btn-link">
+                                <?php if ($jobOpening->getStatus() == 'inactive'): ?>
+                                    <i class="fas fa-eye"></i>
+                                <?php else: ?>
+                                    <i class="fas fa-eye-slash"></i>
+                                <?php endif; ?>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach; ?>

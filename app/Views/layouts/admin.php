@@ -197,6 +197,20 @@
 
                 <?php echo $content; ?>
 
+                <?php if (isset($_SESSION['message'])): ?>
+                <div class="alert <?php
+                echo $_SESSION['msgType'];
+                unset($_SESSION['msgType']); ?> alert-dismissible fade show alert-fixed" role="alert"
+                style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 80%; max-width: 600px;">
+                    <?php
+                    echo $_SESSION['message'];
+                    unset($_SESSION['message']); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php endif; ?>
+
             </div>
             <!-- /.container-fluid -->
 

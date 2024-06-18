@@ -70,6 +70,12 @@ class JobOpeningDAO {
         }
     }
 
+    public function changeVisibilityById($id) {
+        $stmt = $this->pdo->prepare("UPDATE job_opening SET status = IF(status = 'active', 'inactive', 'active') WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
 /*
     public function create(JobOpening $jobOpening) {
         $stmt = $this->pdo->prepare("INSERT INTO job_openings (title, description, company, location) VALUES (:title, :description, :company, :location)");

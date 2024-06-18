@@ -25,6 +25,34 @@ class JobOpeningController {
         $this->render('admin/job_openings', 'admin', ['jobOpenings' => $jobOpenings]);
     }
 
+    public function adminChangeVisibility($jobOpeningId) {
+
+        // Start a session if one hasn't been started already
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Validate CSRF token and redirect if invalid
+        if (!validateCsrfToken($_POST['csrf_token'])) {
+            $_SESSION['message'] = 'Invalid CSRF token';
+            $_SESSION['msgType'] = 'alert-danger';
+            header('Location: /admin');
+            exit();
+        }
+
+        // Code to change status
+        if($this->jobOpeningDAO->changeVisibilityById($jobOpeningId)) {
+            $_SESSION['message'] = 'Visibility changed successfully';
+            $_SESSION['msgType'] = 'alert-success';
+        } else {
+            $_SESSION['message'] = 'Error changing visibility';
+            $_SESSION['msgType'] = 'alert-danger';
+        }
+        header('Location: /admin');
+        exit();
+
+    }
+
     /**
      * Renders the specified view within the specified layout.
      *
