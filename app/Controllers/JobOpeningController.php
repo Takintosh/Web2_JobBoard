@@ -78,6 +78,33 @@ class JobOpeningController {
         $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings, 'companies' => $companies, 'contract' => $contract]);
     }
 
+    public function search() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Validate CSRF token and redirect if invalid
+        if (!validateCsrfToken($_POST['csrf_token'])) {
+            $_SESSION['message'] = 'Invalid CSRF token';
+            $_SESSION['msgType'] = 'alert-danger';
+            header('Location: /');
+            exit();
+        }
+
+        $searchText = $_POST['search-text'];
+        $contract = $_POST['contract'];
+
+        $jobOpenings = $this->jobOpeningDAO->findBySearch($searchText, $contract);
+        $this->companyDAO = new CompanyDAO();
+        $companies = $this->companyDAO->findAll();
+        $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings, 'companies' => $companies]);
+
+    }
+
+    public function redirect() {
+        header('Location: /');
+    }
+
     /**
      * Renders the specified view within the specified layout.
      *

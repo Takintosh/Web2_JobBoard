@@ -63,12 +63,10 @@
                             </form>
                         </ul>
                         <?php else: ?>
-
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fa-solid fa-right-to-bracket"></i>&nbsp; Sign In</button></li>
                             <li><a class="dropdown-item" href="/signup"><i class="fa-solid fa-user-plus"></i>&nbsp; Sign Up</a></li>
                         </ul>
-
                         <?php endif; ?>
 
                     </li>

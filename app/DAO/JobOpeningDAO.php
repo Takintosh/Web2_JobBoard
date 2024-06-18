@@ -130,6 +130,41 @@ class JobOpeningDAO {
         return $jobOpenings;
     }
 
+    public function findBySearch($search, $contract) {
+        $searchTerm = "%" . strtolower($search) . "%";
+        $contract = "%" . strtolower($contract) . "%";
+
+        $stmt = $this->pdo->prepare("SELECT * FROM job_opening j INNER JOIN company c on c.id = j.company_id WHERE (LOWER(j.title) LIKE :searchTerm OR LOWER(j.location) LIKE :searchTerm OR LOWER(c.name) LIKE :searchTerm) AND j.contract LIKE :contract");
+        $stmt->bindParam(':searchTerm', $searchTerm);
+        $stmt->bindParam(':contract', $contract);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $jobOpenings = [];
+        $companyDAO = new CompanyDAO();
+
+        foreach ($results as $row) {
+            $jobOpening = new JobOpeningModel();
+            $jobOpening->setId($row['id']);
+            $jobOpening->setTitle($row['title']);
+            $jobOpening->setDescription($row['description']);
+            $jobOpening->setCompany($row['company_id']);
+            $jobOpening->setLocation($row['location']);
+            $jobOpening->setContract($row['contract']);
+            $jobOpening->setExperience($row['experience']);
+            $jobOpening->setLevel($row['level']);
+            $jobOpening->setStatus($row['status']);
+            $jobOpening->setSalary($row['salary']);
+
+            // Cargar la compañía asociada
+            $company = $companyDAO->findById($row['company_id']);
+            $jobOpening->setCompany($company);
+
+            $jobOpenings[] = $jobOpening;
+        }
+        return $jobOpenings;
+    }
+
     public function changeVisibilityById($id) {
         $stmt = $this->pdo->prepare("UPDATE job_opening SET status = IF(status = 'active', 'inactive', 'active') WHERE id = :id");
         $stmt->bindParam(':id', $id);

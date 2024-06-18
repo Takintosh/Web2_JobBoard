@@ -3,18 +3,19 @@
         <div class="col-12">
             <h4 class="mt-4 text-light text-center"><b>Search for Job Openings</b></h4>
             <hr class="border-light">
-            <form>
+            <form action="/search" method="post">
                 <div class="row py-3 px-5">
                     <div class="col-12 col-lg-6 px-3 py-1">
-                        <input type="text" class="form-control" placeholder="Enter job title, description, keywords" id="inputDefault" spellcheck="false" data-ms-editor="true">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                        <input type="text" name="search-text" class="form-control" placeholder="Enter job title, location or company name" id="inputDefault" spellcheck="false" data-ms-editor="true" required>
                     </div>
                     <div class="col-12 col-lg-6 px-3 py-1">
-                        <select class="form-select" id="exampleSelect1">
-                            <option selected disabled>Choose a category</option>
-                            <option>Full time</option>
-                            <option>Part time</option>
-                            <option>Freelancer</option>
-                            <option>All</option>
+                        <select class="form-select" id="category-select" name="contract" required>
+                            <option disabled>Choose a category</option>
+                            <option value="full-time">Full time</option>
+                            <option value="part-time">Part time</option>
+                            <option value="freelancer">Freelancer</option>
+                            <option value="">All</option>
                         </select>
                     </div>
                 </div>
@@ -39,6 +40,8 @@
                         <?php echo htmlspecialchars($company->getName()); ?> job openings
                     <?php elseif (preg_match("/^\/contract\//", $_SERVER['REQUEST_URI'])): ?>
                         <?php echo htmlspecialchars($contract); ?> job openings
+                    <?php elseif ($_SERVER['REQUEST_URI'] == '/search'): ?>
+                        Search results
                     <?php endif; ?>
                 </b></h4>
             <hr class="border-light">
