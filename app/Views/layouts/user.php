@@ -55,7 +55,7 @@
                             <?php if ($_SESSION['user']['role'] === 'admin'): ?>
                             <li><a class="dropdown-item" href="/admin"><i class="fas fa-cog fa-fw"></i> Admin Panel</a></li>
                             <?php endif; ?>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-sliders-h fa-fw"></i> Account</a></li>
+                            <li><button class="dropdown-item" disabled><i class="fas fa-sliders-h fa-fw"></i> Account</button></li>
                             <li><hr class="dropdown-divider"></li>
                             <form action="/logout" method="post">
                                 <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
