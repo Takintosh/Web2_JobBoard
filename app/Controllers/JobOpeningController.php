@@ -14,7 +14,7 @@ class JobOpeningController {
      * Home page - Displays a list of job openings for users.
      */
     public function index() {
-        $jobOpenings = $this->jobOpeningDAO->findAll();
+        $jobOpenings = $this->jobOpeningDAO->findAllActive();
         $this->companyDAO = new CompanyDAO();
         $companies = $this->companyDAO->findAll();
         $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings, 'companies' => $companies]);

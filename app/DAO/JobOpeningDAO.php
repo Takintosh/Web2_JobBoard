@@ -42,6 +42,36 @@ class JobOpeningDAO {
         return $jobOpenings;
     }
 
+    public function findAllActive() {
+        $stmt = $this->pdo->query("SELECT * FROM job_opening WHERE status = 'active'");
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $jobOpenings = [];
+        $companyDAO = new CompanyDAO();
+
+        foreach ($results as $row) {
+            $jobOpening = new JobOpeningModel();
+            $jobOpening->setId($row['id']);
+            $jobOpening->setTitle($row['title']);
+            $jobOpening->setDescription($row['description']);
+            $jobOpening->setCompany($row['company_id']);
+            $jobOpening->setLocation($row['location']);
+            $jobOpening->setContract($row['contract']);
+            $jobOpening->setExperience($row['experience']);
+            $jobOpening->setLevel($row['level']);
+            $jobOpening->setStatus($row['status']);
+            $jobOpening->setSalary($row['salary']);
+
+            // Cargar la compañía asociada
+            $company = $companyDAO->findById($row['company_id']);
+            $jobOpening->setCompany($company);
+
+            $jobOpenings[] = $jobOpening;
+        }
+
+        return $jobOpenings;
+    }
+
     public function findById($id) {
         $stmt = $this->pdo->prepare("SELECT * FROM job_opening WHERE id = :id");
         $stmt->bindParam(':id', $id);
@@ -71,7 +101,7 @@ class JobOpeningDAO {
     }
 
     public function findByCompany($companyId) {
-        $stmt = $this->pdo->prepare("SELECT * FROM job_opening WHERE company_id = :company");
+        $stmt = $this->pdo->prepare("SELECT * FROM job_opening WHERE (company_id = :company AND status = 'active')");
         $stmt->bindParam(':company', $companyId);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -101,7 +131,7 @@ class JobOpeningDAO {
     }
 
     public function findByContract($contract) {
-        $stmt = $this->pdo->prepare("SELECT * FROM job_opening WHERE contract = :contract");
+        $stmt = $this->pdo->prepare("SELECT * FROM job_opening WHERE (contract = :contract AND status = 'active')");
         $stmt->bindParam(':contract', $contract);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -134,7 +164,7 @@ class JobOpeningDAO {
         $searchTerm = "%" . strtolower($search) . "%";
         $contract = "%" . strtolower($contract) . "%";
 
-        $stmt = $this->pdo->prepare("SELECT * FROM job_opening j INNER JOIN company c on c.id = j.company_id WHERE (LOWER(j.title) LIKE :searchTerm OR LOWER(j.location) LIKE :searchTerm OR LOWER(c.name) LIKE :searchTerm) AND j.contract LIKE :contract");
+        $stmt = $this->pdo->prepare("SELECT * FROM job_opening j INNER JOIN company c on c.id = j.company_id WHERE (LOWER(j.title) LIKE :searchTerm OR LOWER(j.location) LIKE :searchTerm OR LOWER(c.name) LIKE :searchTerm) AND j.contract LIKE :contract AND j.status = 'active'");
         $stmt->bindParam(':searchTerm', $searchTerm);
         $stmt->bindParam(':contract', $contract);
         $stmt->execute();
@@ -191,11 +221,6 @@ class JobOpeningDAO {
         return $stmt->execute();
     }
 
-    public function delete($id) {
-        $stmt = $this->pdo->prepare("DELETE FROM job_openings WHERE id = :id");
-        $stmt->bindParam(':id', $id);
-        return $stmt->execute();
-    }
 */
 
 }
