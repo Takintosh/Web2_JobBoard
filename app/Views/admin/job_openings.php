@@ -14,6 +14,7 @@
                     <th>Position</th>
                     <th>Company</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -21,6 +22,7 @@
                     <th>Position</th>
                     <th>Company</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -28,9 +30,13 @@
 
                 <?php foreach ($jobOpenings as $jobOpening): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($jobOpening->getTitle()); ?></td>
+                    <td><a href="/admin/applications/<?php echo $jobOpening->getId(); ?>"><?php echo htmlspecialchars($jobOpening->getTitle()); ?></a></td>
                     <td><?php echo htmlspecialchars($jobOpening->getCompany()->getName()); ?></td>
                     <td><?php echo htmlspecialchars($jobOpening->getStatus()); ?></td>
+                    <td>
+                        <a href="#" title="Change Visibility"><i class="fas fa-eye"></i></a>
+                        <a href="#" title="View applications"><i class="fas fa-list-alt"></i></a>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
 

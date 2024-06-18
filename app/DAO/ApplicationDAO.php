@@ -56,4 +56,29 @@ class ApplicationDAO {
         return $stmt->fetch();
     }
 
+    // Method to find all applications for a specific job opening
+    public function findAllByJobOpening($jobOpeningId) {
+        // Prepare an SQL statement for selecting all application records based on job opening ID
+        $stmt = $this->pdo->prepare("SELECT * FROM application WHERE jobOpeningId = :jobOpeningId");
+        // Bind the job opening ID parameter to the prepared statement
+        $stmt->bindParam(':jobOpeningId', $jobOpeningId);
+        // Execute the prepared statement
+        $stmt->execute();
+        // Fetch all application records
+        $results = $stmt->fetchAll();
+
+        $applications = [];
+        $userDAO = new UserDAO();
+
+        foreach ($results as $row) {
+            $application = new ApplicationModel();
+
+            $user = $userDAO->findById($row['userId']);
+            $application->setUser($user);
+            $applications[] = $application;
+        }
+        return $applications;
+
+    }
+
 }

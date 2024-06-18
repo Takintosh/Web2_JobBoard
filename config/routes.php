@@ -23,5 +23,6 @@ $router->post('/apply', [ApplicationController::class, 'apply'], AuthMiddleware:
 
 // Routes for administrators
 $router->get('/admin', [JobOpeningController::class, 'adminListJobOpenings'], AdminMiddleware::class);
+$router->get('/admin/applications/{jobOpeningId}', [ApplicationController::class, 'adminListApplications'], AdminMiddleware::class);
 
 return $router;

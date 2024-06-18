@@ -38,6 +38,32 @@ class UserDAO {
         return null;
     }
 
+    public function findById($id) {
+        // Prepare the SQL statement for finding a user by ID
+        $stmt = $this->pdo->prepare("SELECT * FROM user WHERE id = :id");
+        // Bind parameters to the prepared statement
+        $stmt->bindParam(':id', $id);
+        // Execute the query
+        $stmt->execute();
+        // Fetch the result
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            // Create a new UserModel object
+            $user = new UserModel();
+            $user->setId($row['id']);
+            $user->setName($row['name']);
+            $user->setEmail($row['email']);
+            $user->setPassword($row['password']);
+            $user->setRole($row['role']);
+            $user->setLinkedin($row['linkedin']);
+            $user->setPicture($row['picture']);
+            // Return the user
+            return $user;
+        }
+        return null;
+    }
+
     public function create(UserModel $user) {
         // Prepare the SQL statement for inserting a new user
         $stmt = $this->pdo->prepare("INSERT INTO user (name, email, password, role, linkedin, picture) VALUES (:name, :email, :password, :role, :linkedin, :picture)");

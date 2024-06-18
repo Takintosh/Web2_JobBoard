@@ -41,14 +41,36 @@ class JobOpeningDAO {
 
         return $jobOpenings;
     }
-/*
+
     public function findById($id) {
-        $stmt = $this->pdo->prepare("SELECT * FROM job_openings WHERE id = :id");
+        $stmt = $this->pdo->prepare("SELECT * FROM job_opening WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        return $stmt->fetchObject('JobOpening');
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $companyDAO = new CompanyDAO();
+        if($row) {
+            $jobOpening = new JobOpeningModel();
+            $jobOpening->setId($row['id']);
+            $jobOpening->setTitle($row['title']);
+            $jobOpening->setDescription($row['description']);
+            $jobOpening->setCompany($row['company_id']);
+            $jobOpening->setLocation($row['location']);
+            $jobOpening->setContract($row['contract']);
+            $jobOpening->setExperience($row['experience']);
+            $jobOpening->setLevel($row['level']);
+            $jobOpening->setStatus($row['status']);
+            $jobOpening->setSalary($row['salary']);
+            // Cargar la compañía asociada
+            $company = $companyDAO->findById($row['company_id']);
+            $jobOpening->setCompany($company);
+            return $jobOpening;
+        } else {
+            return null;
+        }
     }
 
+/*
     public function create(JobOpening $jobOpening) {
         $stmt = $this->pdo->prepare("INSERT INTO job_openings (title, description, company, location) VALUES (:title, :description, :company, :location)");
         $stmt->bindParam(':title', $jobOpening->title);

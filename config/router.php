@@ -50,12 +50,14 @@ class Router {
      */
     public function dispatch($method, $path) {
         foreach ($this->routes as $route) {
-            if ($route['method'] == $method && $route['path'] == $path) {
+            $routePath = $this->convertPathToRegex($route['path']);
+            if ($route['method'] == $method && preg_match($routePath, $path, $matches)) {
                 if ($route['middleware']) {
                     (new $route['middleware'])->handle();
                 }
+                array_shift($matches); // Remove the full match
                 list($controller, $action) = $route['action'];
-                (new $controller)->$action();
+                (new $controller)->$action(...$matches);
                 return;
             }
         }
@@ -63,5 +65,10 @@ class Router {
         // If route not found
         http_response_code(404);
         echo "404 Not Found";
+    }
+
+
+    private function convertPathToRegex($path) {
+        return '#^' . preg_replace('/\{[a-zA-Z0-9_]+\}/', '([a-zA-Z0-9_]+)', $path) . '$#';
     }
 }
