@@ -38,12 +38,11 @@ class JobOpeningDAO {
 
             $jobOpenings[] = $jobOpening;
         }
-
         return $jobOpenings;
     }
 
     public function findAllActive() {
-        $stmt = $this->pdo->query("SELECT * FROM job_opening WHERE status = 'active'");
+        $stmt = $this->pdo->query("SELECT * FROM job_opening WHERE status = 'active' ORDER BY publication_date DESC");
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $jobOpenings = [];
@@ -68,7 +67,6 @@ class JobOpeningDAO {
 
             $jobOpenings[] = $jobOpening;
         }
-
         return $jobOpenings;
     }
 
@@ -201,26 +199,30 @@ class JobOpeningDAO {
         return $stmt->execute();
     }
 
-/*
-    public function create(JobOpening $jobOpening) {
-        $stmt = $this->pdo->prepare("INSERT INTO job_openings (title, description, company, location) VALUES (:title, :description, :company, :location)");
-        $stmt->bindParam(':title', $jobOpening->title);
-        $stmt->bindParam(':description', $jobOpening->description);
-        $stmt->bindParam(':company', $jobOpening->company);
-        $stmt->bindParam(':location', $jobOpening->location);
+    public function create(JobOpeningModel $jobOpening) {
+        $stmt = $this->pdo->prepare("INSERT INTO job_opening (title, company_id, contract, location, level, experience, salary, description, publisher_id) VALUES (:title, :company, :contract, :location, :level, :experience, :salary, :description, :publisher)");
+
+        $title = $jobOpening->getTitle();
+        $company = $jobOpening->getCompanyId();
+        $contract = $jobOpening->getContract();
+        $location = $jobOpening->getLocation();
+        $level = $jobOpening->getLevel();
+        $experience = $jobOpening->getExperience();
+        $salary = $jobOpening->getSalary();
+        $description = $jobOpening->getDescription();
+        $publisher = $jobOpening->getPublisherId();
+
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':company', $company);
+        $stmt->bindParam(':contract', $contract);
+        $stmt->bindParam(':location', $location);
+        $stmt->bindParam(':level', $level);
+        $stmt->bindParam(':experience', $experience);
+        $stmt->bindParam(':salary', $salary);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':publisher', $publisher);
+
         return $stmt->execute();
     }
-
-    public function update(JobOpening $jobOpening) {
-        $stmt = $this->pdo->prepare("UPDATE job_openings SET title = :title, description = :description, company = :company, location = :location WHERE id = :id");
-        $stmt->bindParam(':id', $jobOpening->id);
-        $stmt->bindParam(':title', $jobOpening->title);
-        $stmt->bindParam(':description', $jobOpening->description);
-        $stmt->bindParam(':company', $jobOpening->company);
-        $stmt->bindParam(':location', $jobOpening->location);
-        return $stmt->execute();
-    }
-
-*/
 
 }

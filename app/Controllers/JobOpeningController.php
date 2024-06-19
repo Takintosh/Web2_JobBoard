@@ -98,8 +98,51 @@ class JobOpeningController {
         $this->companyDAO = new CompanyDAO();
         $companies = $this->companyDAO->findAll();
         $this->render('user/home', 'user', ['jobOpenings' => $jobOpenings, 'companies' => $companies]);
-
     }
+
+    public function newJobOpening() {
+        $this->companyDAO = new CompanyDAO();
+        $companies = $this->companyDAO->findAll();
+        $this->render('admin/new_job_opening', 'admin', ['companies' => $companies]);
+    }
+
+    public function createJobOpening() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Validate CSRF token and redirect if invalid
+        if (!validateCsrfToken($_POST['csrf_token'])) {
+            $_SESSION['message'] = 'Invalid CSRF token';
+            $_SESSION['msgType'] = 'alert-danger';
+            header('Location: /');
+            exit();
+        }
+
+        $jobOpening = new JobOpeningModel();
+
+        $jobOpening->setTitle($_POST['title']);
+        $jobOpening->setCompanyId($_POST['company']);
+        $jobOpening->setContract($_POST['contract']);
+        $jobOpening->setLocation($_POST['location']);
+        $jobOpening->setLevel($_POST['expertise']);
+        $jobOpening->setExperience($_POST['experience']);
+        $jobOpening->setSalary($_POST['salary']);
+        $jobOpening->setDescription($_POST['description']);
+        $jobOpening->setPublisherId($_POST['publisher']);
+
+        if($this->jobOpeningDAO->create($jobOpening)) {
+            $_SESSION['message'] = 'Job opening created successfully';
+            $_SESSION['msgType'] = 'alert-success';
+            header('Location: /admin');
+        } else {
+            $_SESSION['message'] = 'Error creating job opening';
+            $_SESSION['msgType'] = 'alert-danger';
+            header('Location: /admin/new-job-opening');
+        }
+        exit();
+    }
+
 
     public function redirect() {
         header('Location: /');

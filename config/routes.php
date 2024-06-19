@@ -29,5 +29,7 @@ $router->post('/apply', [ApplicationController::class, 'apply'], AuthMiddleware:
 $router->get('/admin', [JobOpeningController::class, 'adminListJobOpenings'], AdminMiddleware::class);
 $router->get('/admin/applications/{jobOpeningId}', [ApplicationController::class, 'adminListApplications'], AdminMiddleware::class);
 $router->post('/admin/change-visibility/{jobOpeningId}', [JobOpeningController::class, 'adminChangeVisibility'], AdminMiddleware::class);
+$router->get('/admin/new-job-opening', [JobOpeningController::class, 'newJobOpening'], AdminMiddleware::class);
+$router->post('/admin/new-job-opening', [JobOpeningController::class, 'createJobOpening'], AdminMiddleware::class);
 
 return $router;
