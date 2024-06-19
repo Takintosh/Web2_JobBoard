@@ -47,7 +47,7 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" href="/">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <i class="fas fa-external-link-square-alt"></i>
                 <span>Website</span></a>
         </li>
 
@@ -57,33 +57,27 @@
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link" href="/admin">
-                <i class="fas fa-fw fa-chart-area"></i>
+                <i class="fas fa-briefcase"></i>
                 <span>Jobs Openings</span></a>
         </li>
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="/admin">
-                <i class="fas fa-fw fa-chart-area"></i>
+            <a class="nav-link" href="#">
+                <i class="fas fa-clipboard-list"></i>
                 <span>Applications</span></a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="/admin">
-                <i class="fas fa-fw fa-chart-area"></i>
+            <a class="nav-link" href="#">
+                <i class="fas fa-building"></i>
                 <span>Companies</span></a>
         </li>
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="/admin">
-                <i class="fas fa-fw fa-chart-area"></i>
+            <a class="nav-link" href="#">
+                <i class="fas fa-users"></i>
                 <span>Users</span></a>
         </li>
 

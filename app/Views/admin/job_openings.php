@@ -1,5 +1,9 @@
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Job Openings</h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4 mx-2">
+    <h1 class="h3 mb-0 text-gray-800">Job Openings</h1>
+    <a href="/admin/new-job-opening" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-plus-square"></i> Create job opening</a>
+</div>
 
 <!-- DataTales -->
 <div class="card shadow mb-4">
@@ -15,7 +19,6 @@
                     <th>Company</th>
                     <th>Status</th>
                     <th>Actions</th>
-                    <th>Count</th>
                 </tr>
                 </thead>
                 <tfoot>
@@ -24,7 +27,6 @@
                     <th>Company</th>
                     <th>Status</th>
                     <th>Actions</th>
-                    <th>Count</th>
                 </tr>
                 </tfoot>
                 <tbody>
@@ -47,9 +49,6 @@
                                 <?php endif; ?>
                             </button>
                         </form>
-                    </td>
-                    <td>
-
                     </td>
                 </tr>
                 <?php endforeach; ?>
