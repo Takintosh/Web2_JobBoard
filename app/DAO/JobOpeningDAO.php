@@ -32,7 +32,6 @@ class JobOpeningDAO {
             $jobOpening->setStatus($row['status']);
             $jobOpening->setSalary($row['salary']);
 
-            // Cargar la compañía asociada
             $company = $companyDAO->findById($row['company_id']);
             $jobOpening->setCompany($company);
 
@@ -61,7 +60,6 @@ class JobOpeningDAO {
             $jobOpening->setStatus($row['status']);
             $jobOpening->setSalary($row['salary']);
 
-            // Cargar la compañía asociada
             $company = $companyDAO->findById($row['company_id']);
             $jobOpening->setCompany($company);
 
@@ -89,7 +87,7 @@ class JobOpeningDAO {
             $jobOpening->setLevel($row['level']);
             $jobOpening->setStatus($row['status']);
             $jobOpening->setSalary($row['salary']);
-            // Cargar la compañía asociada
+
             $company = $companyDAO->findById($row['company_id']);
             $jobOpening->setCompany($company);
             return $jobOpening;
@@ -119,7 +117,6 @@ class JobOpeningDAO {
             $jobOpening->setStatus($row['status']);
             $jobOpening->setSalary($row['salary']);
 
-            // Cargar la compañía asociada
             $company = $companyDAO->findById($row['company_id']);
             $jobOpening->setCompany($company);
 
@@ -149,7 +146,6 @@ class JobOpeningDAO {
             $jobOpening->setStatus($row['status']);
             $jobOpening->setSalary($row['salary']);
 
-            // Cargar la compañía asociada
             $company = $companyDAO->findById($row['company_id']);
             $jobOpening->setCompany($company);
 
@@ -184,7 +180,6 @@ class JobOpeningDAO {
             $jobOpening->setStatus($row['status']);
             $jobOpening->setSalary($row['salary']);
 
-            // Cargar la compañía asociada
             $company = $companyDAO->findById($row['company_id']);
             $jobOpening->setCompany($company);
 

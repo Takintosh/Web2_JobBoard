@@ -99,7 +99,6 @@ class ApplicationController {
 
         // Load the view
         $this->render('admin/applications', 'admin', ['applications' => $applications, 'jobOpening' => $jobOpening]);
-
     }
 
     /**
