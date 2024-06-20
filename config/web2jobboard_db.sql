@@ -38,10 +38,6 @@ CREATE TABLE `application` (
 -- Dumping data for table `application`
 --
 
-INSERT INTO `application` (`userId`, `jobOpeningId`, `applicationDate`, `status`) VALUES
-(7, 11, '2024-06-18 04:25:45', 'new'),
-(7, 12, '2024-06-18 04:37:36', 'new'),
-(7, 13, '2024-06-18 21:42:34', 'new');
 
 -- --------------------------------------------------------
 
@@ -125,8 +121,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `linkedin`, `picture`, `created_at`, `role`) VALUES
-(1, 'John Smith', 'john.smith@example.com', '$2y$10$so7h/M39r7aKwQg/WRxsMuw48LyL4cYIQTkSb5gZvbKLyAEOoEkf6', 'https://www.linkedin.com/in/john-smith/', 'profile.png', '2024-06-12 06:03:39', 'admin'),
-(7, 'Amilcar Santana', 'takintosh@gmail.com', '$2y$10$s.WcuoUxdARMUsHZGqiEOeIl9IuY8jNYRFRQ32kpFi7haGBOirpCK', 'https://www.linkedin.com/in/amilcar-santana/', 'IMG_20220715_180451_697.jpg', '2024-06-13 05:53:08', 'admin');
+(1, 'John Smith', 'john.smith@example.com', '$2y$10$so7h/M39r7aKwQg/WRxsMuw48LyL4cYIQTkSb5gZvbKLyAEOoEkf6', 'https://www.linkedin.com/in/john-smith/', 'profile.png', '2024-06-12 06:03:39', 'admin');
 
 --
 -- Indexes for dumped tables
